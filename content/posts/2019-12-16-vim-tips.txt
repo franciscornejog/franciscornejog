@@ -1,0 +1,306 @@
+#+TITLE: Vim Tips
+#+DATE: <2019-12-16>
+
+Below are the following commands that may help you. If you ever get
+stuck, type ~:help~ for more information.
+
+**Normal Mode** is the default mode when entering Vim. This mode is
+mainly used for altering text. If not in Normal Mode, press ~Esc~ or
+~<C-[>~ to return. Also, you can use these commands to exit any mode and
+return to Normal Mode.
+
+** Motion
+These are the basic movements.
+- ~[hjkl]~ - move [left, bottom, top, right]
+- ~g[hjkl]~ - move [left, bottom, top, right] on display lines
+
+The following movements allow a greater range of mobility.
+- ~w | W~ - next word
+- ~b | B~ - previous word
+- ~e | E~ - end of current word
+- ~ge | gE~ - end of previous word
+- ~[g]0~ - move to start of [display] line
+- ~>[g]^~ - move to first non-whitespace character of [display] line
+- ~[g]$~ - move to end of [display] line
+- ~%~ - jump to matching tag
+- ~(/)~ - jump to start/end of next sentence
+- ~{/}~ - jump to start/end of next paragraph
+- ~H/M/L~ - jump to top/middle/bottom of screen
+- ~gf~ - jump to filename under cursor
+- ~gg~ - jump to start of file
+- ~G~ - jump to end of file
+- ~zz~ - redraws to middle of screen
+- ~z[tzb]~ - redraw to [top, middle, bottom] of screen
+- ~<C-]>~ - jump to definition of keyword under cursor
+
+If you make any changes while in Normal Mode, the following commands
+will help.
+- ~.~ - repeat last change
+- ~u~ - undo change
+- ~<C-r>~ - redo change
+- ~g[;,]~ - traverse backward/forward through each change
+
+** Marks
+- ~m[a-zA-Z]~ - make mark
+- ~'[mark]~ - jump to mark - ~`~ for exact column
+- ~'.~ - jump to last change
+- ~'’~ - jump to last position
+- ~'^~ - jump to last insertion
+- ~'[~ - jump to start of last change/yank
+- ~']~ - jump to end of last change/yank
+- ~'<~ - jump to start of visual selection
+- ~'>~ - jump to end of visual selection
+
+** Editing
+The following commands will allow you to edit text in various ways.
+- ~~~ - toggle case
+- ~ga~ - show numeric code for current character
+- ~x~ - delete character
+- ~J~ - join lines together
+- ~#[<C-a> | <C-x>]~ - [add, subtract] #
+
+** Buffers
+You can also navigate through buffers/jump list with these commands.
+- ~<C-o>~ - move to previous buffer/jump
+- ~<C-i>~ - move to next buffer/jump
+- ~<C-^>~ - switch alternate buffers
+- ~<C-g>~ - echo name & status of current buffer
+
+** Windows
+*** Splitting
+- ~<C-w>s~ - split horizontally
+- ~<C-w>v~ - split vertically
+
+*** Changing Focus
+- ~<C-w>w~ - cycle through open windows
+- ~<C-w>[hjkl]~ - focus [left, bottom, top, right] window
+
+*** Closing
+- ~<C-w>c~ - close active window
+- ~<C-w>o~ - keep only active window
+
+*** Resizing
+- ~<C-w>=~ - equalize width/height of all windows
+- ~#<C-w>_~ - maximize or set active window height to # rows
+- ~#<C-w>|~ - maximize or set active window width to # columns
+- ~<C-w>[+-]~ - [decrease, increase] active window height by 1 line
+
+*** Moving
+- ~<C-w>r~ - rotate all windows
+- ~<C-w>x~ - swap current window with neighbor
+- ~<C-w>[HJKL]~ - move current window to [left, bottom, top, right]
+- ~<C-w>T~ - move split window into new tab
+
+** Tabs
+- ~gt~ - move to next tab
+- ~gT~ - move to previous tab
+- ~#gt~ - move to tab #
+
+** Other Modes
+**Replace Mode** is a mode where you can change text without inserting
+anything. The following commands will allow you to access this mode.
+- ~R~ - enter Replace Mode
+- ~r~ - replace character
+
+**Virtual Replace Mode** is just like Replace Mode but can act on tabs
+and whitespace as if they were spaces.
+- ~gR~ - enter Virtual Replace Mode
+- ~gr~ - replace virtual character
+
+**Operator-Pending Mode** is a mode that you briefly enter when typing
+the following commands.
+
+** Editing
+These commands are usually appended by a motion. Some commands act on a
+line when typed twice.
+- ~c~ - change
+- ~d~ - delete
+- ~y~ - yank
+- ~[<>]~ - shift [left, right]
+- ~=~ - autoindent
+- ~g~~ - swap case
+- ~gu~ - lowercase
+- ~gU~ - uppercase
+
+** Character Search
+These commands act on following characters and may be used to move
+around more efficiently.
+- ~f~ - find next character
+- ~F~ - find previous character
+- ~t~ - find until next character
+- ~T~ - find until previous character
+- ~;~ - go to next character
+- ~,~ - go to previous character
+
+** Other
+- ~q~ - record macro
+- ~@~ - start macro
+- ~!~ - filter through external program
+
+**Insert Mode** is used for inserting text. The following commands will
+send you to Insert Mode.
+- ~i~ - insert at character
+- ~gi~ - insert at last insertion
+- ~I~ - insert at start of line
+- ~a~ - append after character
+- ~A~ - append at end of line
+- ~C~ - change line
+- ~o~ - new line below
+- ~O~ - new line above
+- ~s~ - substitute character
+- ~S~ - substitute line
+
+**Insert Normal Mode** is a quick way to do a Normal Command before
+returning to Insert Mode. Just press ~<C-o>~ to go to Normal Mode for
+just one command.
+
+**Visual Mode** is utilized for selecting and operating on text. The
+following commands will send you to Visual Mode. You can exit normally
+or also press the following commands again.
+- ~v~ - enter character-wise Visual Mode
+- ~V~ - enter line-wise Visual Mode
+- ~<C-v>~ - enter block-wise Visual Mode
+
+** Editing
+You can also interact with your selection and make changes.
+- ~gv~ - reselect last visual selection
+- ~o~ - go to alternate end of selection
+- ~U~ - uppercase selection
+- ~u~ - lowercase selection
+
+**Command Mode** allow you to make greater changes with Ex commands. To
+enter this mode, press ':'.
+- ~p[rint]~ - echo current line
+- ~join~ - join lines
+- ~yank [register]~ - yank into register
+- ~put [register]~ - put text from register after line
+- ~co[py]/t [address]~ - copy lines to to below specififiedy by
+address
+- ~m[ove] [address]~ - move lines to to below specififiedy by address
+- ~delete [register]~ - delete into register
+- ~norm[al] [command]~ - execute normal command
+- ~s[ubstitute]/[pattern]/[string]/[flags]~ - substitute
+- ~&~ - repeat substitution
+- ~global/[pattern]/[cmd]~ - execute command on specified lines where
+pattern matches
+- ~vglobal~
+
+** Motion & Selection
+- ~#~ - specify line
+- ~%~ - entire file range/current file name
+- ~0~ - beginning of file
+- ~$~ - end of file
+- ~.~ - current line
+- ~‘<,’>~ - visual range
+- ~[start],[end]~ - specify range
+- ~[address] + n~ - offset range
+
+** Navigation
+- ~[<C-p> | <C-n>]~ - go to [previous, next] command
+- ~<C-r><C-w>~ - copies current word into prompt
+- ~<C-d>~ - autocomplete
+
+** Shell
+**Note**: To use the shell, it's recommended to use ~<C-z>~ & ~fg~
+instead.
+- ~!~ - run shell commands
+- ~shell~ - enter shell session
+- ~pwd~ - print working directory
+- ~cd~ - change directory
+- ~find~ - open file
+- ~set path+=[subdir]~ - specify directories Vim will look in
+
+** Buffers
+- ~bp[revious]/bn[ext]~ - interact with buffer list
+- ~b[uffer] #~ - go to specified buffer
+- ~bufdo~ - execute Ex command in all buffers
+- ~bd[elete]~ - delete buffer
+- ~ls~ - shows content of buffer list
+- ~%~ - filepath of active buffer - appending ':h' removes the
+filename
+
+** Argument List
+**Note**: May use globbing and backtick expansion.
+- ~args~ - list arguments
+- ~first~ - go to first arg
+- ~next/prev[ious]~ - navigate files in args
+- ~argdo~ - execute same command on each buffer in the set
+- ~cfdo~ - execute command in each file on quickfix list
+
+** Files
+- ~e[dit]~ - create new file
+- ~w[rite]~ - save file/take buffer content into input
+- ~wn[ext]~ - save current file & edit next file
+- ~up[date]~ - save file only if buffer is modified
+- ~read~ - take output into buffer
+- ~E[xplore]~ - open file explorer for directory of active buffer
+- ~Sex[plore]~ - open file explorer horizontally
+- ~Vex[plore]~ - open file explorer vertically
+
+** Tabs
+- ~tabe[dit] [file]~ - open file in new tab
+- ~tabc[lose]~ - close current tab
+- ~tabo[nly]~ - keep only current tab
+- ~tabn[ext] #~ - go to tab # or next tab
+- ~tabp[revious]~ - go to previous tab
+- ~tabl[ast]~ - go to last tab
+- ~tabmove #~ - move tab
+
+** Windows
+- ~sp[lit] [file]~ - split window horizontally & create new buffer
+- ~vsp[lit] [file]~ - split window vertically & create new buffer
+- ~clo[se]/q[uit]~ - close active window
+- ~on[ly]~ - keep only active window
+- ~lcd [path]~ - set local working directory in window
+- ~windo lcd [path]~ - set local working directory for all windows in
+tab
+
+**Command Line Window Mode** opens a buffer that allows you to edit its
+specified history.
+- ~q:~ - enter command line window with Ex commands history
+- ~q/~ - enter command line window with search history
+- ~<C-f>~ - switch to command line window
+
+**Search Mode** is a way to search for long text.
+- ~*~ - search current word
+- ~/~ - search forward
+- ~?~ - search backward
+- ~K~ - search current word for man page
+- ~n~ - go to next search
+- ~N~ - repeat previous search
+
+**Insert & Command Modes** have some commands in common listed below.
+- ~<C-h>~ - backspace
+- ~<C-w>~ - delete back one word
+- ~<C-u>~ - delete back to start of line
+
+** Registers
+**Note:** prepend u to four-digit hexadecimal code
+- ~<C-r>[register]~ - paste from specified register
+- ~<C-r><C-p>[register]~ - paste unformatted text
+- ~<C-v>[code]~ - convert to character
+- ~<C-k>[digraph]~ - convert character
+
+**Expression Register** is a unique register to do quick calculations
+and more. Just press ~<C-r>=~ to enter.
+
+In addition to these modes, there are more features to Vim.
+
+**Macros** introduce a way to record multiple commands.
+- ~@:~ - repeat Ex command
+- ~@@~ - repeat macro
+
+**Text Objects** allow for greater control over which text to operate
+on.
+- ~a[w, t, p, ) | b, } | B, ], >, ’, ", `]~ - around [word, tag,
+paragraph, (), {}, [], '', "", ``]
+- ~i[w, t, p, ) | b, } | B, ], >, ', ", `]~ - in [word, tag,
+paragraph, (), {}, [], '', "", ``]
+
+** Recommended Plugins
+- unimpaired vim
+- visual-star
+- vim commentary
+- vim essential
+- vim surround
+- vim matchit

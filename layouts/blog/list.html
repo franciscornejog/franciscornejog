@@ -1,0 +1,16 @@
+{{ define "main" }}
+<ul class="posts">
+{{ $pag := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
+{{ range $pag.Pages }}
+    <li class="post-stub">
+        <a href="{{ .Permalink }}">
+            <p>{{ .Title }}</p>
+            <time datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ dateFormat (default "02 Jan 2006" .Site.Params.dateFormat) .Date }}
+            </time>
+        </a>
+    </li>
+{{ end }}
+</ul>
+{{ end }}
+
