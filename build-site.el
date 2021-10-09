@@ -105,7 +105,8 @@
              :sitemap-filename "posts.txt"
              :sitemap-sort-files 'anti-chronologically
              :sitemap-style 'list
-             :exclude "posts.txt")
+             :exclude "posts.txt"
+             :exclude "posts.html")
        (list "static"
              :recursive t
              :base-directory "static"
