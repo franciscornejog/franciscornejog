@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="robots" content="index,follow">
+    <link href="../assets/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/main.css"rel="stylesheet" type="text/css">
+    <title>Vim Tips</title>
+  </head>
+  <body>
+    <header>
+      <div class="with-image">
+        <img src="../assets/img/profile/profile-1024.jpeg">
+        <p>Francisco Cornejo-Garcia <span class="tagline">RIT | Computer Science</p>
+      </div>
+      <nav>
+        <a href="../index.html">About</a>
+        <a href="../posts.html">Posts</a>
+      </nav>
+      <h1 class="title">Vim Tips</h1>
+    </header>
+    <main>
+      <article>
+        <p>Below are the following commands that may help you. If you
+        ever get stuck, type <code>:help</code> for more information.
+        <strong>Normal Mode</strong> is the default mode when entering
+        Vim. This mode is mainly used for altering text. If not in
+        Normal Mode, press <code>Esc</code> or <code>&lt;C-[&gt;</code>
+        to return. Also, you can use these commands to exit any mode and
+        return to Normal Mode.</p>
+        <h2 id="moving-between-characters">Moving Between
+        Characters</h2>
+        <ul>
+        <li><code>[hjkl]</code> - move [left, bottom, top, right]</li>
+        <li><code>g[hjkl]</code> - move [left, bottom, top, right] on
+        display lines</li>
+        <li><code>w | W</code> - next word</li>
+        <li><code>b | B</code> - previous word</li>
+        <li><code>e | E</code> - end of current or next word</li>
+        <li><code>ge | gE</code> - end of previous word</li>
+        <li><code>[g]0</code> - move to start of [display] line</li>
+        <li><code>[g]^</code> - move to first non-whitespace character
+        of [display] line</li>
+        <li><code>[g]$</code> - move to end of [display] line</li>
+        </ul>
+        <h2 id="moving-between-lines">Moving Between Lines</h2>
+        <ul>
+        <li><code>%</code> - jump to matching tag</li>
+        <li><code>(/)</code> - jump to start/end of next sentence</li>
+        <li><code>{/}</code> - jump to start/end of next paragraph</li>
+        <li><code>H/M/L</code> - jump to top/middle/bottom of
+        screen</li>
+        <li><code>gg</code> - jump to start of file</li>
+        <li><code>G</code> - jump to end of file</li>
+        </ul>
+        <h2 id="moving-between-files">Moving Between Files</h2>
+        <ul>
+        <li><p><code>gf</code> - jump to filename under cursor</p></li>
+        <li><p><code>&lt;C-]&gt;</code> - jump to definition of keyword
+        under cursor</p></li>
+        <li><p><code>z[tzb]</code> - redraw to [top, middle, bottom] of
+        screen</p></li>
+        </ul>
+        <p>Special Commands - <code>.</code> - repeat last change</p>
+        <p>If you make any changes while in Normal Mode, the following
+        commands will help. - <code>u</code> - undo change -
+        <code>&lt;C-r&gt;</code> - redo change</p>
+        <h2 id="one-shot-commands">One Shot Commands</h2>
+        <p>The following commands peforms a one-shot action. -
+        <code>~</code> - toggle case - <code>x</code> - delete character
+        - <code>J</code> - join lines together -
+        <code>#[&lt;C-a&gt; | &lt;C-x&gt;]</code> - [add, subtract]
+        #</p>
+        <p><strong>Operator-Pending Mode</strong> is a mode that you
+        briefly enter when typing the following commands. These commands
+        are usually appended by a motion. Some commands act on a line
+        when typed twice. - <code>c</code> - change - <code>d</code> -
+        delete - <code>y</code> - yank - <code>[&lt;&gt;]</code> - shift
+        [left, right] - <code>=</code> - autoindent - <code>g~</code> -
+        swap case - <code>gu</code> - lowercase - <code>gU</code> -
+        uppercase - <code>!</code> - filter through external program</p>
+        <h2 id="character-search">Character Search</h2>
+        <p>These commands act on following characters and may be used to
+        move around more efficiently. - <code>f?</code> - find next
+        character - <code>F?</code> - find previous character -
+        <code>t?</code> - find until next character - <code>T?</code> -
+        find until previous character - <code>;</code> - go to next
+        character - <code>,</code> - go to previous character</p>
+        <p><strong>Macros</strong> introduce a way to record multiple
+        commands. - <code>q?</code> - record and name a macro with any ?
+        letter - <code>@?</code> - start macro - <code>@:</code> -
+        repeat Ex command - <code>@@</code> - repeat macro</p>
+        <p><strong>Text Objects</strong> allow for greater control over
+        which text to operate on. -
+        <code>a[w, t, p, ) | b, } | B, ], &gt;, ’, ", \</code>]<code>- around [word, tag, paragraph, (), {}, [], '', "", ``] -</code>i[w,
+        t, p, ) | b, } | B, ], &gt;, ’, “, `]` - in [word, tag,
+        paragraph, (), {}, [], ’’, ““, ``]</p>
+        <h2 id="marks">Marks</h2>
+        <ul>
+        <li><code>m[a-zA-Z]</code> - make mark</li>
+        <li><code>'[mark]</code> - jump to mark - ``` for exact
+        column</li>
+        <li><code>'.</code> - jump to last change</li>
+        <li><code>'’</code> - jump to last position</li>
+        <li><code>'^</code> - jump to last insertion</li>
+        <li><code>'[</code> - jump to start of last change/yank</li>
+        <li><code>']</code> - jump to end of last change/yank</li>
+        <li><code>'&lt;</code> - jump to start of visual selection</li>
+        <li><code>'&gt;</code> - jump to end of visual selection</li>
+        </ul>
+        <h2 id="buffers">Buffers</h2>
+        <p>You can also navigate through buffers/jump list with these
+        commands. - <code>&lt;C-o&gt;</code> - move to previous
+        buffer/jump - <code>&lt;C-i&gt;</code> - move to next
+        buffer/jump - <code>&lt;C-^&gt;</code> - switch alternate
+        buffers - <code>&lt;C-g&gt;</code> - echo name &amp; status of
+        current buffer/file</p>
+        <p>You can also manipulate buffers through <strong>Command
+        Mode</strong>. - <code>:bp[revious]/bn[ext]</code> - interact
+        with buffer list - <code>:b[uffer] #</code> - go to specified
+        buffer - <code>:bufdo</code> - execute Ex command in all buffers
+        - <code>:bd[elete]</code> - delete buffer - <code>:ls</code> -
+        shows content of buffer list - <code>:%</code> - filepath of
+        active buffer - appending ‘:h’ removes the filename -
+        <code>:lcd [path]</code> - set local working directory in window
+        - <code>:windo lcd [path]</code> - set local working directory
+        for all windows in tab</p>
+        <h2 id="windows">Windows</h2>
+        <h3 id="split-windows">Split Windows</h3>
+        <ul>
+        <li><code>&lt;C-w&gt;s</code> - split horizontally</li>
+        <li><code>&lt;C-w&gt;v</code> - split vertically</li>
+        <li><code>:sp[lit] [file]</code> - split horizontally</li>
+        <li><code>:vsp[lit] [file]</code> - split vertically</li>
+        </ul>
+        <h3 id="close-windows">Close Windows</h3>
+        <ul>
+        <li><code>&lt;C-w&gt;c</code> - close active window</li>
+        <li><code>&lt;C-w&gt;o</code> - keep only active window</li>
+        <li><code>:clo[se]/q[uit]</code> - close active window</li>
+        <li><code>:on[ly]</code> - keep only active window</li>
+        </ul>
+        <h3 id="change-focus">Change Focus</h3>
+        <ul>
+        <li><code>&lt;C-w&gt;w</code> - cycle through open windows</li>
+        <li><code>&lt;C-w&gt;[hjkl]</code> - focus [left, bottom, top,
+        right] window</li>
+        </ul>
+        <h3 id="move-windows">Move Windows</h3>
+        <ul>
+        <li><code>&lt;C-w&gt;r</code> - rotate all windows</li>
+        <li><code>&lt;C-w&gt;x</code> - swap current window with
+        neighbor</li>
+        <li><code>&lt;C-w&gt;[HJKL]</code> - move current window to
+        [left, bottom, top, right]</li>
+        <li><code>&lt;C-w&gt;T</code> - move split window into new
+        tab</li>
+        </ul>
+        <h3 id="resize-windows">Resize Windows</h3>
+        <ul>
+        <li><code>&lt;C-w&gt;=</code> - equalize width/height of all
+        windows</li>
+        <li><code>#&lt;C-w&gt;_</code> - maximize or set active window
+        height to # rows</li>
+        <li><code>#&lt;C-w&gt;|</code> - maximize or set active window
+        width to # columns</li>
+        <li><code>&lt;C-w&gt;[+-]</code> - [decrease, increase] active
+        window height by 1 line</li>
+        </ul>
+        <h2 id="tabs">Tabs</h2>
+        <ul>
+        <li><code>gt</code> - move to next tab</li>
+        <li><code>gT</code> - move to previous tab</li>
+        <li><code>#gt</code> - move to tab #</li>
+        <li><code>:tabe[dit] [file]</code> - open file in new tab</li>
+        <li><code>:tabc[lose]</code> - close current tab</li>
+        <li><code>:tabo[nly]</code> - keep only current tab</li>
+        <li><code>:tabn[ext] #</code> - go to tab # or next tab</li>
+        <li><code>:tabp[revious]</code> - go to previous tab</li>
+        <li><code>:tabl[ast]</code> - go to last tab</li>
+        <li><code>:tabmove #</code> - move tab</li>
+        </ul>
+        <p><strong>Insert Mode</strong> is used for inserting text. The
+        following commands will send you to Insert Mode. -
+        <code>i</code> - insert at character</p>
+        <p><strong>Insert &amp; Command Modes</strong> have some
+        commands in common listed below. - <code>&lt;C-h&gt;</code> -
+        backspace - <code>&lt;C-w&gt;</code> - delete back one word -
+        <code>&lt;C-u&gt;</code> - delete back to start of line</p>
+        <p>There are some ways to exit <strong>Insert Mode</strong>. -
+        <code>Esc</code> - go to <strong>Normal Mode</strong> -
+        <code>&lt;C-[&gt;</code> - go to <strong>Normal
+        Mode</strong></p>
+        <h2 id="compound-commands">Compound Commands</h2>
+        <p>These commands will not only put you in Insert mode but also
+        move to that location. - <code>gi</code> - insert at last
+        insertion - <code>I</code> - insert at start of line -
+        <code>a</code> - append after character - <code>A</code> -
+        append at end of line - <code>C</code> - change line -
+        <code>o</code> - new line below - <code>O</code> - new line
+        above - <code>s</code> - substitute character - <code>S</code> -
+        substitute line</p>
+        <p><strong>Insert Normal Mode</strong> is a quick way to do a
+        Normal Command before returning to Insert Mode. Just press
+        <code>&lt;C-o&gt;</code> to go to Normal Mode for just one
+        command.</p>
+        <h2 id="registers">Registers</h2>
+        <p><strong>Note:</strong> prepend u to four-digit hexadecimal
+        code - <code>&lt;C-r&gt;[register]</code> - paste from specified
+        register - <code>&lt;C-r&gt;&lt;C-p&gt;[register]</code> - paste
+        unformatted text - <code>&lt;C-v&gt;[code]</code> - convert to
+        character - <code>&lt;C-k&gt;[char1][char2]</code> - insert a
+        digraph - <code>ga</code> - show numeric code for current
+        character - “[register] - set a register</p>
+        <p><strong>Expression Register</strong> is a unique register to
+        do quick calculations and more. Just press
+        <code>&lt;C-r&gt;=</code> to enter.</p>
+        <p><strong>Replace Mode</strong> is a mode where you can change
+        text without inserting anything. The following commands will
+        allow you to access this mode. - <code>R</code> - enter Replace
+        Mode - <code>r</code> - replace character</p>
+        <p><strong>Virtual Replace Mode</strong> is just like Replace
+        Mode but can act on tabs and whitespace as if they were spaces.
+        - <code>gR</code> - enter Virtual Replace Mode - <code>gr</code>
+        - replace virtual character</p>
+        <p><strong>Visual Mode</strong> is utilized for selecting and
+        operating on text. The following commands will send you to
+        Visual Mode. You can exit normally or also press the following
+        commands again. - <code>v</code> - enter character-wise Visual
+        Mode - <code>V</code> - enter line-wise Visual Mode -
+        <code>&lt;C-v&gt;</code> - enter block-wise Visual Mode -
+        <code>gv</code> - reselect last visual selection</p>
+        <p>When in <strong>Visual mode</strong>, you can navigate and
+        make changes with your selection. - <code>o</code> - go to
+        alternate end of selection - <code>U</code> - uppercase
+        selection - <code>u</code> - lowercase selection</p>
+        <p><strong>Command Mode</strong> allow you to make greater
+        changes with Ex commands. To enter this mode, press ‘:’. -
+        <code>:p[rint]</code> - echo current line -
+        <code>:[range]delete [register]</code> - delete into register -
+        <code>:[range]yank [register]</code> - yank into register -
+        <code>:#put [register]</code> - put text from register after
+        line # - <code>:[range]co[py]/t [address]</code> - copy lines to
+        to below specififiedy by address -
+        <code>:[range]m[ove] [address]</code> - move lines to to below
+        specififiedy by address - <code>:[range]join</code> - join lines
+        - <code>:[range]norm[al] [command]</code> - execute normal
+        command - <code>:[range]global/[pattern]/[cmd]</code> - execute
+        command on specified lines where pattern matches -
+        <code>:vglobal</code></p>
+        <p><strong>Search Mode</strong> is a way to search for long
+        text. - <code>*</code> - search current word - <code>/</code> -
+        search forward - <code>?</code> - search backward -
+        <code>K</code> - search current word for man page -
+        <code>n</code> - go to next search - <code>N</code> - repeat
+        previous search</p>
+        <h2 id="search-and-substitute">Search and Substitute</h2>
+        <ul>
+        <li><code>:[range]s[ubstitute]/[pattern]/[string]/[flags]</code>
+        - substitute</li>
+        <li><code>&amp;</code> - repeat substitution</li>
+        </ul>
+        <h2 id="motion-selection">Motion &amp; Selection</h2>
+        <ul>
+        <li><code>:#</code> - specify line</li>
+        <li><code>:%</code> - entire file range/current file name</li>
+        <li><code>:0</code> - beginning of file</li>
+        <li><code>:$</code> - end of file</li>
+        <li><code>:.</code> - current line</li>
+        <li><code>:‘&lt;,’&gt;</code> - visual range</li>
+        <li><code>:[start],[end]</code> - specify range</li>
+        <li><code>:[address] + n</code> - offset range</li>
+        </ul>
+        <h2 id="navigation">Navigation</h2>
+        <ul>
+        <li><code>[&lt;C-p&gt; | &lt;C-n&gt;]</code> - go to [previous,
+        next] command</li>
+        <li><code>&lt;C-r&gt;&lt;C-w&gt;</code> - copies current word
+        into prompt</li>
+        <li><code>&lt;C-d&gt;</code> - autocomplete</li>
+        </ul>
+        <h2 id="shell">Shell</h2>
+        <p><strong>Note</strong>: To use the shell, it’s recommended to
+        use <code>&lt;C-z&gt;</code> &amp; <code>fg</code> instead. -
+        <code>:!</code> - run shell commands - <code>:shell</code> -
+        enter shell session - <code>:pwd</code> - print working
+        directory - <code>:cd</code> - change directory -
+        <code>:find</code> - open file -
+        <code>:set path+=[subdir]</code> - specify directories Vim will
+        look in</p>
+        <h2 id="argument-list">Argument List</h2>
+        <p><strong>Note</strong>: May use globbing and backtick
+        expansion. - <code>:args</code> - list arguments -
+        <code>:first</code> - go to first arg -
+        <code>:next/prev[ious]</code> - navigate files in args -
+        <code>:argdo</code> - execute same command on each buffer in the
+        set - <code>:cfdo</code> - execute command in each file on
+        quickfix list</p>
+        <h2 id="files">Files</h2>
+        <ul>
+        <li><code>:e[dit]</code> - create new file</li>
+        <li><code>:w[rite]</code> - save file/take buffer content into
+        input</li>
+        <li><code>:wn[ext]</code> - save current file &amp; edit next
+        file</li>
+        <li><code>:up[date]</code> - save file only if buffer is
+        modified</li>
+        <li><code>:read</code> - take output into buffer</li>
+        <li><code>:E[xplore]</code> - open file explorer for directory
+        of active buffer</li>
+        <li><code>:Sex[plore]</code> - open file explorer
+        horizontally</li>
+        <li><code>:Vex[plore]</code> - open file explorer
+        vertically</li>
+        </ul>
+        <p><strong>Command Line Window Mode</strong> opens a buffer that
+        allows you to edit its specified history. - <code>q:</code> -
+        enter command line window with Ex commands history -
+        <code>q/</code> - enter command line window with search history
+        - <code>&lt;C-f&gt;</code> - switch to command line window</p>
+        <p>Changelist - <code>g[;,]</code> - traverse backward/forward
+        through each change</p>
+        <h2 id="recommended-plugins">Recommended Plugins</h2>
+        <ul>
+        <li>vim commentary - gc operator to comment</li>
+        <li>textobj-entire - ie ae text objects to select entire
+        file</li>
+        <li>unimpaired vim</li>
+        <li>visual-star</li>
+        <li>vim essential</li>
+        <li>vim surround</li>
+        <li>vim matchit</li>
+        </ul>
+      </article>
+    </main>
+    <footer>
+      <p>Copyright 2021 Francisco Cornejo-Garcia  All Rights Reserved.</p>
+      <p>Available under <a href="https://creativecommons.org/licenses/by-sa/3.0/us/">
+        Creative Commons Attribution ShareAlike</a>.
+      </p>
+    </footer>
+    </body>
+</html>

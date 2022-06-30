@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="robots" content="index,follow">
+    <link href="../assets/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/main.css"rel="stylesheet" type="text/css">
+    <title>How I Build My Site</title>
+  </head>
+  <body>
+    <header>
+      <div class="with-image">
+        <img src="../assets/img/profile/profile-1024.jpeg">
+        <p>Francisco Cornejo-Garcia <span class="tagline">RIT | Computer Science</p>
+      </div>
+      <nav>
+        <a href="../index.html">About</a>
+        <a href="../posts.html">Posts</a>
+      </nav>
+      <h1 class="title">How I Build My Site</h1>
+    </header>
+    <main>
+      <article>
+        <p>I use Emacs to build my site from a collection of org files
+        into a series of web pages. The current setup is developed on a
+        Mac with a Doom Emacs distribution.</p>
+        <h2 id="intro">Intro</h2>
+        <p>This is the commented header section that documents the
+        following file as a configuration file that publishes a series
+        of org files as html webpages.</p>
+        <pre class="elisp"><code>;;; build-site.el --- Description -*- lexical-binding: t; -*-
+;;
+;; Copyright (C) 2021 Francisco Cornejo-Garcia
+;;
+;; Author: Francisco Cornejo-Garcia &lt;https://github.com/franciscornejog&gt;
+;; Maintainer: Francisco Cornejo-Garcia &lt;franciscornejog@gmail.com&gt;
+;; Created: October 02, 2021
+;; Modified: October 02, 2021
+;; Version: 0.0.1
+;; Keywords: abbrev bib c calendar comm convenience data docs emulations extensions faces files frames games hardware help hypermedia i18n internal languages lisp local maint mail matching mouse multimedia news outlines processes terminals tex tools unix vc wp
+;; Homepage: https://github.com/franciscornejogarcia/build-site
+;; Package-Requires: ((emacs &quot;24.3&quot;))
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; Commentary:
+;;
+;;  Description
+;;
+;;; Code:
+
+;; load publishing system
+(require &#39;ox-publish)</code></pre>
+        <h2 id="variables">Variables</h2>
+        <pre class="elisp"><code>(defvar build-site-html-head
+    &quot;&lt;meta charset=\&quot;utf-8\&quot;&gt;
+    &lt;meta name=\&quot;HandheldFriendly\&quot; content=\&quot;True\&quot;&gt;
+    &lt;meta name=\&quot;MobileOptimized\&quot; content=\&quot;320\&quot;&gt;
+    &lt;meta name=\&quot;robots\&quot; content=\&quot;index,follow\&quot;&gt;
+    &lt;meta name=\&quot;viewport\&quot; content=\&quot;width=device-width, initial-scale=1.0\&quot;&gt;
+    &lt;title&gt;Francisco Cornejo-Garcia&lt;/title&gt;
+    &lt;link href=\&quot;static/css/normalize.css\&quot; rel=\&quot;stylesheet\&quot; type=\&quot;text/css\&quot;&gt;
+    &lt;link href=\&quot;static/css/main.css\&quot;rel=\&quot;stylesheet\&quot; type=\&quot;text/css\&quot;&gt;&quot;)
+
+(defvar build-site-html-preamble
+  &quot;&lt;header&gt;
+    &lt;div class=\&quot;with-image\&quot;&gt;
+        &lt;img src=\&quot;static/img/profile/profile-1024.jpeg\&quot;&gt;
+        &lt;p&gt;Francisco Cornejo-Garcia &lt;span class=\&quot;tagline\&quot;&gt;RIT | Computer Science&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;nav&gt;
+        &lt;a href=\&quot;index.html\&quot;&gt;About&lt;/a&gt;
+        &lt;a href=\&quot;posts.html\&quot;&gt;Posts&lt;/a&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;&quot;)
+
+(defvar build-site-html-postamble
+&quot;&lt;footer&gt;
+    &lt;p&gt;Copyright 2021 Francisco Cornejo-Garcia  All Rights Reserved.&lt;/p&gt;
+    &lt;p&gt;Available under &lt;a href=\&quot;https://creativecommons.org/licenses/by-sa/3.0/us/\&quot;&gt;
+        Creative Commons Attribution ShareAlike&lt;/a&gt;.
+    &lt;/p&gt;
+ &lt;/footer&gt;&quot;)</code></pre>
+        <h2 id="convert-org-links-to-connect-to-html-pages">Convert org
+        links to connect to HTML pages</h2>
+        <pre class="elisp"><code>(defun build-site-org-export-convert-txt-links (backend)
+  &quot;Convert all text links to html links in the BACKEND.&quot;
+  (cond ((string= backend &quot;html&quot;)
+  (let ((txt-regex &quot;\\[file:\\(.*\\)\.txt\\]&quot;))
+    (while (re-search-forward txt-regex nil t)
+      (build-site-convert-txt-link (match-string 1)))))))
+(defun build-site-convert-txt-link (name)
+  &quot;Convert a NAME of a text link into an html link.&quot;
+  (replace-match (concat &quot;[file:&quot; name &quot;.html]&quot;)))
+(add-hook &#39;org-export-before-processing-hook #&#39;build-site-org-export-convert-txt-links)</code></pre>
+        <h2 id="set-default-parameters">Set default parameters</h2>
+        <pre class="elisp"><code>(setq org-html-validation-link nil            ;; remove validate link
+      org-html-head-include-scripts nil       ;; remove default scripts
+      org-html-head-include-default-style nil ;; remove default styles
+      org-html-head build-site-html-head
+      org-html-preamble build-site-html-preamble
+      org-html-postamble build-site-html-postamble
+      org-html-coding-system &#39;utf-8-unix
+      org-html-metadata-timestamp-format &quot;%d %m %Y&quot;
+      org-html-htmlize-output-type &#39;css
+      org-html-doctype &quot;html5&quot;
+      org-html-html5-fancy t)</code></pre>
+        <h2 id="publishing-rules">Publishing Rules</h2>
+        <pre class="elisp"><code>;; define publishing project
+(setq org-publish-project-alist
+      (list
+       (list &quot;franciscornejog&quot;
+             :base-extension &quot;txt&quot;
+             :base-directory &quot;content&quot;
+             :publishing-directory &quot;public&quot;
+             :publishing-function &#39;org-html-publish-to-html
+             :htmlized-source t       ;; enable htmlize
+             :with-date t
+             :with-author nil         ;; remove author name
+             :with-toc nil            ;; remove table of contents
+             :section-numbers nil     ;; remove section numbers
+             :time-stamp-file nil)    ;; remove time stamp
+       (list &quot;posts&quot;
+             :recursive t
+             :base-directory &quot;content/posts&quot;
+             :base-extension &quot;txt&quot;
+             :publishing-directory &quot;public&quot;
+             :publishing-function &#39;org-html-publish-to-html
+             :htmlized-source t       ;; enable htmlize
+             :with-date t
+             :with-toc nil            ;; remove table of contents
+             :section-numbers nil     ;; remove section numbers
+             :time-stamp-file t       ;; remove time stamp
+             :auto-sitemap t
+             :sitemap-title &quot;Posts&quot;
+             :sitemap-filename &quot;posts.txt&quot;
+             :sitemap-sort-files &#39;anti-chronologically
+             :sitemap-style &#39;list)
+       (list &quot;static&quot;
+             :recursive t
+             :base-directory &quot;static&quot;
+             :base-extension &quot;css\\|jpg\\|jpeg&quot;
+             :publishing-directory &quot;public/static&quot;
+             :publishing-function &#39;org-publish-attachment)))</code></pre>
+        <p>After generating all the files, the follow block will publish
+        these files to their directories and send a message once the
+        build is complete.</p>
+        <pre class="elisp"><code>;; generate site output
+(org-publish-all t)
+(message &quot;Build complete!&quot;)
+;;; build-site.el ends here</code></pre>
+      </article>
+    </main>
+    <footer>
+      <p>Copyright 2021 Francisco Cornejo-Garcia  All Rights Reserved.</p>
+      <p>Available under <a href="https://creativecommons.org/licenses/by-sa/3.0/us/">
+        Creative Commons Attribution ShareAlike</a>.
+      </p>
+    </footer>
+    </body>
+</html>
