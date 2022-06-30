@@ -1,6 +1,0 @@
-#+TITLE: Posts
-
-- [[file:2021-10-09-org-publish.txt][How I Build My Site]]
-- [[file:2020-10-08-scp.txt][How to SCP]]
-- [[file:2020-01-03-college.txt][8 Pointers for College Newbies]]
-- [[file:2019-12-16-vim-tips.txt][Vim Tips]]

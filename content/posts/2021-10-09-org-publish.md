@@ -1,13 +1,14 @@
-#+TITLE: How I Build My Site
-#+DATE: <2021-10-09 Sat>
-#+PROPERTY: header-args :tangle build-site.el
+---
+title: How I Build My Site
+date: <2021-10-09 Sat>
+---
 
 I use Emacs to build my site from a collection of org files into a series of web pages. The current setup is developed on a Mac with a Doom Emacs distribution.
 
-** Intro
+## Intro
 This is the commented header section that documents the following file as a configuration file that publishes a series of org files as html webpages.
 
-#+begin_src elisp
+```elisp
 ;;; build-site.el --- Description -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (C) 2021 Francisco Cornejo-Garcia
@@ -31,10 +32,10 @@ This is the commented header section that documents the following file as a conf
 
 ;; load publishing system
 (require 'ox-publish)
-#+end_src
+```
 
-** Variables
-#+begin_src elisp
+## Variables
+```elisp
 (defvar build-site-html-head
     "<meta charset=\"utf-8\">
     <meta name=\"HandheldFriendly\" content=\"True\">
@@ -64,10 +65,10 @@ This is the commented header section that documents the following file as a conf
         Creative Commons Attribution ShareAlike</a>.
     </p>
  </footer>")
-#+end_src
+```
 
-** Convert org links to connect to HTML pages
-#+begin_src elisp
+## Convert org links to connect to HTML pages
+```elisp
 (defun build-site-org-export-convert-txt-links (backend)
   "Convert all text links to html links in the BACKEND."
   (cond ((string= backend "html")
@@ -78,10 +79,10 @@ This is the commented header section that documents the following file as a conf
   "Convert a NAME of a text link into an html link."
   (replace-match (concat "[file:" name ".html]")))
 (add-hook 'org-export-before-processing-hook #'build-site-org-export-convert-txt-links)
-#+end_src
+```
 
-** Set default parameters
-#+begin_src elisp
+## Set default parameters
+```elisp
 (setq org-html-validation-link nil            ;; remove validate link
       org-html-head-include-scripts nil       ;; remove default scripts
       org-html-head-include-default-style nil ;; remove default styles
@@ -93,10 +94,10 @@ This is the commented header section that documents the following file as a conf
       org-html-htmlize-output-type 'css
       org-html-doctype "html5"
       org-html-html5-fancy t)
-#+end_src
+```
 
-** Publishing Rules
-#+begin_src elisp
+## Publishing Rules
+```elisp
 ;; define publishing project
 (setq org-publish-project-alist
       (list
@@ -133,13 +134,13 @@ This is the commented header section that documents the following file as a conf
              :base-extension "css\\|jpg\\|jpeg"
              :publishing-directory "public/static"
              :publishing-function 'org-publish-attachment)))
-#+end_src
+```
 
 After generating all the files, the follow block will publish these files to their directories and send a message once the build is complete.
 
-#+begin_src elisp
+```elisp
 ;; generate site output
 (org-publish-all t)
 (message "Build complete!")
 ;;; build-site.el ends here
-#+end_src
+```
